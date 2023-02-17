@@ -1,3 +1,5 @@
+# Copyright Michael Choi All Rights Reserved
+
 import re
 from playwright.sync_api import Page, expect
 
