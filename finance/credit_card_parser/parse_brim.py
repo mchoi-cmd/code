@@ -36,7 +36,7 @@ with open(filelocation) as csvfile:
             purchases.append(parsed)
 
 
-with open("parsed_brim.csv", 'w') as output:    
+with open("brim.csv", 'w') as output:    
     for entry in purchases:
         output.write(str(entry))
         output.write('\n')

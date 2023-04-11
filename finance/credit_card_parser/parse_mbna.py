@@ -31,7 +31,7 @@ with open(filelocation) as csvfile:
         if parsed.description not in parsed.payment_filter:
             purchases.append(parsed)
 
-with open("parsed_mbna.csv", 'w') as output:    
+with open("mbna.csv", 'w') as output:    
     for entry in purchases:
         output.write(str(entry))
         output.write('\n')

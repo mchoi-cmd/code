@@ -32,7 +32,7 @@ with open(filelocation) as csvfile:
         if parsed.description not in parsed.payment_filter and parsed.amount[0] != "-":
             purchases.append(parsed)
 
-with open("parsed_rogers.csv", 'w') as output:    
+with open("rogers.csv", 'w') as output:    
     for entry in purchases:
         output.write(str(entry))
         output.write('\n')
