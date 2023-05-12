@@ -13,16 +13,15 @@ class data_brim(data_credit_card):
     # 1 'Transaction Date', 
     # 2 'Posted Date', 
     # 3 'Description', 
-    # 4 'Cardmember', 
-    # 5 'Amount', 
+    # 4 'Amount', 
     # 6 'Points', 
     # 7 'Category']
     payment_filter = ["Redemption", "Refund", "Payment"]
 
     def __init__(self, line):
-        data_credit_card.__init__(self, line[2], line[3], line[5])
+        data_credit_card.__init__(self, line[2], line[3], line[4])
         self.transaction_date = line[1]
-        self.category = line[7]
+        self.category = line[6]
         if self.category not in self.payment_filter:
             self.purchase = True
 
