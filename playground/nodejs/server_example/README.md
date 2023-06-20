@@ -5,3 +5,7 @@ In this example, we use Express.js as the web framework to handle the REST reque
 The error handling middleware function is registered using app.use. It catches any errors thrown by the route handler or subsequent middleware. It logs the error to the console and sends an error response with the appropriate status code and error message.
 
 You can run this server by saving the code in a file (e.g., server.js) and running node server.js in your terminal. Make sure to install the required dependencies (express) by running npm install express. The server will start listening on port 3000, and you can send REST requests to it using tools like cURL or Postman.
+
+
+To run pytest: 
+`pytest test_server.py --junitxml=test_report.xml`
