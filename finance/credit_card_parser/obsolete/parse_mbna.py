@@ -1,10 +1,10 @@
 # Copyright Michael Choi All Rights Reserved
 
-import argparse 
-import csv 
+import argparse
+import csv
 
-class data_mbna:    
-    # MBNA column 
+class data_mbna:
+    # MBNA column
     # Posted Date,Payee,Address,Amount
     payment_filter = ["CASH REWARD", "PAYMENT"]
 
@@ -19,19 +19,19 @@ parser = argparse.ArgumentParser(description='Parse MBNA csv file')
 parser.add_argument('filename', help='MBNA csv file, full path')
 args = parser.parse_args()
 
-filelocation = args.filename 
+filelocation = args.filename
 
 purchases = []
 with open(filelocation) as csvfile:
-    reader = csv.reader(csvfile)    
+    reader = csv.reader(csvfile)
     next(reader)
-    
+
     for row in reader:
         parsed = data_mbna(row[0], row[1], row[3])
         if parsed.description not in parsed.payment_filter:
             purchases.append(parsed)
 
-with open("mbna.csv", 'w') as output:    
+with open("mbna.csv", 'w') as output:
     for entry in purchases:
         output.write(str(entry))
         output.write('\n')
