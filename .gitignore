@@ -3,6 +3,7 @@
 *.DS_Store
 *.pyc
 *.zip
+*launch.json
 *node_modules*
 *package-lock.json
 *package.json
