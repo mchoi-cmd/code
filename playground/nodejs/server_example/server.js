@@ -25,7 +25,6 @@ app.get('/api/address/:id', (req, res) => {
   // Simulating an error for demonstration purposes
   if (addressId === 'error') {
     const error = new Error('Address not found');
-    // error.status = 404;
     throw error;
   }
 
