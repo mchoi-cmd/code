@@ -7,14 +7,14 @@ class data_credit_card:
         self.amount = amount
         self.purchase = False
 
-class data_brim(data_credit_card):    
-    # BRIM columns 
-    # 0 ['No', 
-    # 1 'Transaction Date', 
-    # 2 'Posted Date', 
-    # 3 'Description', 
-    # 4 'Amount', 
-    # 6 'Points', 
+class data_brim(data_credit_card):
+    # BRIM columns
+    # 0 ['No',
+    # 1 'Transaction Date',
+    # 2 'Posted Date',
+    # 3 'Description',
+    # 4 'Amount',
+    # 6 'Points',
     # 7 'Category']
     payment_filter = ["Redemption", "Refund", "Payment"]
 
@@ -27,18 +27,18 @@ class data_brim(data_credit_card):
 
     def __str__(self):
         return self.posted_date + "," +  self.description + "," +  self.amount
-    
+
     @classmethod
     def initialize(self, line):
         self.__init__(self, line)
-        return self 
+        return self
 
     def display(self):
         output_string = self.__str__(self)
         return output_string
 
-class data_mbna(data_credit_card):    
-    # MBNA columns 
+class data_mbna(data_credit_card):
+    # MBNA columns
     # 0 Posted Date,
     # 1 Payee,
     # 2 Address,
@@ -49,21 +49,21 @@ class data_mbna(data_credit_card):
         data_credit_card.__init__(self, line[0], line[1], line[3])
         if self.description not in self.payment_filter:
             self.purchase = True
-        
+
     def __str__(self):
         return self.posted_date + "," +  self.description + "," +  self.amount.replace('-', '')
-    
+
     @classmethod
     def initialize(self, line):
         self.__init__(self, line)
-        return self 
-    
+        return self
+
     def display(self):
         output_string = self.__str__(self)
         return output_string
 
-class data_rogers(data_credit_card):    
-    # ROGERS column 
+class data_rogers(data_credit_card):
+    # ROGERS column
     # 0 "Date",
     # 1 "Posted Date",
     # 2 "Reference Number",
@@ -86,15 +86,15 @@ class data_rogers(data_credit_card):
         self.transaction_date = line[0]
         if self.description not in self.payment_filter and self.amount[0] != "-":
             self.purchase = True
-        
+
     def __str__(self):
-        return self.posted_date + "," +  self.description + "," +  self.amount        
-    
+        return self.posted_date + "," +  self.description + "," +  self.amount
+
     @classmethod
     def initialize(self, line):
         self.__init__(self, line)
-        return self 
-    
+        return self
+
     def display(self):
         output_string = self.__str__(self)
         return output_string
