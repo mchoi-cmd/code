@@ -2,13 +2,8 @@ import json
 import requests
 
 base_url = "http://localhost:3000"
-headers = {
-    'Content-Type': 'application/json'
-    }
-sample_cart_no_item = {
-    "items" : [
-    ]
-}
+headers = {'Content-Type': 'application/json'}
+sample_cart_no_item = {"items" : []}
 sample_cart_single_item = {
     "items" : [
         {"id": "item1", "unitPrice": 10, "quantity": 2}
@@ -18,29 +13,29 @@ sample_cart_multiple_items = {
     "items" : [
         {"id": "item1", "unitPrice": 10, "quantity": 2},
         {"id": "item2", "unitPrice": 5, "quantity": 3},
-        {"id": "item3", "unitPrice": 5, "quantity": 3}
+        {"id": "item3", "unitPrice": 5, "quantity": 3},
     ]
 }
 sample_cart_invalid_type = {
     "items" : [
-        {"id": "item1", "unitPrice": "10", "quantity": 2}
+        {"id": "item1", "unitPrice": "10", "quantity": 2},
     ]
 }
 sample_cart_invalid_data = {
     "items" : [
         {"id": "item1", "unitPrice": 10},
         {"id": "item2", "unitPrice": 5, "quantity": 3},
-        {"id": "item3", "unitPrice": 5, "quantity": 3}
+        {"id": "item3", "unitPrice": 5, "quantity": 3},
     ]
 }
 sample_cart_negative_unitPrice = {
     "items" : [
-        {"id": "item1", "unitPrice": -2, "quantity": 2}
+        {"id": "item1", "unitPrice": -2, "quantity": 2},
     ]
 }
 sample_cart_negative_quantity = {
     "items" : [
-        {"id": "item1", "unitPrice": 2, "quantity": -2}
+        {"id": "item1", "unitPrice": 2, "quantity": -2},
     ]
 }
 

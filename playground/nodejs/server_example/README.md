@@ -1,4 +1,4 @@
-implement a Node.js server that take in rest request with error handling via openai
+Implement a Node.js server that take in rest request with error handling via openai
 
 In this example, we use Express.js as the web framework to handle the REST requests. The server listens on port 3000, and we define a single route that handles a GET request to `/api/user/:id`. Inside the route handler, we check the `id` parameter and throw an error if it equals 'error'.
 

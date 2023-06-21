@@ -15,6 +15,7 @@ class data_credit_card:
         output_string = self.__str__(self)
         return output_string
 
+
 class data_brim(data_credit_card):
     # BRIM columns
     # 0 ['No',
