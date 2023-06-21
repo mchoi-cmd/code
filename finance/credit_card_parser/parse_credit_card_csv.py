@@ -1,7 +1,7 @@
 # Copyright Michael Choi All Rights Reserved
 
-import argparse 
-import csv 
+import argparse
+import csv
 import libs.cc_csv_data
 
 parser = argparse.ArgumentParser(description='Parse Credit Card csv file')
@@ -9,7 +9,7 @@ parser.add_argument('company', help='Credit Card company', choices= ['brim', 'mb
 parser.add_argument('filename', help='Credit Card csv file, full path')
 args = parser.parse_args()
 
-filelocation = args.filename 
+filelocation = args.filename
 company = args.company
 
 match company:
@@ -28,15 +28,15 @@ match company:
 
 purchases = []
 with open(filelocation) as csvfile:
-    reader = csv.reader(csvfile)    
+    reader = csv.reader(csvfile)
     next(reader)
-    
+
     for row in reader:
         parsed = process_data(row)
         if parsed.purchase:
             purchases.append(output_data(parsed))
 
-with open(output_filename, 'w') as output:    
+with open(output_filename, 'w') as output:
     for entry in purchases:
         output.write(entry)
         output.write('\n')
