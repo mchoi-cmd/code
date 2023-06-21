@@ -1,16 +1,17 @@
 # Copyright Michael Choi All Rights Reserved
 
-import re
-from playwright.sync_api import Page, expect, sync_playwright
 
+import re
+
+from playwright.sync_api import Page, expect, sync_playwright
 
 
 def test(page: Page):
     pw = sync_playwright()
     pw.c
-    browser = chromium.launch()    
+    browser = chromium.launch()
     context = browser.new_context()
-    
+
     # Start tracing before creating / navigating a page.
     context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
@@ -37,4 +38,4 @@ def test(page: Page):
 
 
 # with sync_playwright() as playwright:
-#     run(playwright) 
+#     run(playwright)

@@ -1,15 +1,16 @@
 # Copyright Michael Choi All Rights Reserved
 
-import re
-from playwright.sync_api import Page, expect, sync_playwright
 
+import re
+
+from playwright.sync_api import Page, expect, sync_playwright
 
 
 def run(playwright):
     chromium = playwright.chromium
-    browser = chromium.launch()    
+    browser = chromium.launch()
     context = browser.new_context()
-    
+
     # Start tracing before creating / navigating a page.
     context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
@@ -36,11 +37,9 @@ def run(playwright):
     # # Click the shows link.
     schedule.click()
 
-
-
     # Stop tracing and export it into a zip archive.
     context.tracing.stop(path = "trace1.zip")
 
 
 with sync_playwright() as playwright:
-    run(playwright) 
+    run(playwright)

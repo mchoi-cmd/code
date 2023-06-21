@@ -10,72 +10,40 @@ sample_cart_no_item = {
     ]
 }
 sample_cart_single_item = {
-    "items" : [{
-        "id": "item1",
-        "unitPrice": 10,
-        "quantity": 2
-    }
+    "items" : [
+        {"id": "item1", "unitPrice": 10, "quantity": 2}
     ]
 }
 sample_cart_multiple_items = {
-    "items" : [{
-        "id": "item1",
-        "unitPrice": 10,
-        "quantity": 2
-    },
-    {
-        "id": "item2",
-        "unitPrice": 5,
-        "quantity": 3
-    },
-    {
-        "id": "item3",
-        "unitPrice": 5,
-        "quantity": 3
-    }
+    "items" : [
+        {"id": "item1", "unitPrice": 10, "quantity": 2},
+        {"id": "item2", "unitPrice": 5, "quantity": 3},
+        {"id": "item3", "unitPrice": 5, "quantity": 3}
     ]
 }
 sample_cart_invalid_type = {
-    "items" : [{
-        "id": "item1",
-        "unitPrice": "10",
-        "quantity": 2
-    }
+    "items" : [
+        {"id": "item1", "unitPrice": "10", "quantity": 2}
     ]
 }
 sample_cart_invalid_data = {
-    "items" : [{
-        "id": "item1",
-        "unitPrice": 10
-    },
-    {
-        "id": "item2",
-        "unitPrice": 5,
-        "quantity": 3
-    },
-    {
-        "id": "item3",
-        "unitPrice": 5,
-        "quantity": 3
-    }
+    "items" : [
+        {"id": "item1", "unitPrice": 10},
+        {"id": "item2", "unitPrice": 5, "quantity": 3},
+        {"id": "item3", "unitPrice": 5, "quantity": 3}
     ]
 }
 sample_cart_negative_unitPrice = {
-    "items" : [{
-        "id": "item1",
-        "unitPrice": -2,
-        "quantity": 2
-    }
+    "items" : [
+        {"id": "item1", "unitPrice": -2, "quantity": 2}
     ]
 }
 sample_cart_negative_quantity = {
-    "items" : [{
-        "id": "item1",
-        "unitPrice": 2,
-        "quantity": -2
-    }
+    "items" : [
+        {"id": "item1", "unitPrice": 2, "quantity": -2}
     ]
 }
+
 
 def test_post_positive_multiple_items():
     # Send Request
@@ -87,6 +55,7 @@ def test_post_positive_multiple_items():
     assert response.json()["items"] == sample_cart_multiple_items["items"]
     assert response.json()["totalPrice"] == 50
 
+
 def test_post_positive_single_item():
     # Send Request
     payload = json.dumps(sample_cart_single_item)
@@ -97,6 +66,7 @@ def test_post_positive_single_item():
     assert response.json()["items"] == sample_cart_single_item["items"]
     assert response.json()["totalPrice"] == 20
 
+
 def test_post_positive_no_item():
     # Send Request
     payload = json.dumps(sample_cart_no_item)
@@ -104,6 +74,7 @@ def test_post_positive_no_item():
 
     # Assert
     assert response.status_code == 400
+
 
 def test_post_negative_invalid_item():
     # Send Request
@@ -113,6 +84,7 @@ def test_post_negative_invalid_item():
     # Assert
     assert response.status_code == 400
 
+
 def test_post_negative_unitPrice():
     # Send Request
     payload = json.dumps(sample_cart_negative_unitPrice)
@@ -120,6 +92,7 @@ def test_post_negative_unitPrice():
 
     # Assert
     assert response.status_code == 400
+
 
 def test_post_negative_quantity():
     # Send Request
@@ -129,6 +102,7 @@ def test_post_negative_quantity():
     # Assert
     assert response.status_code == 400
 
+
 def test_post_negative_invalid_data():
     # Send Request
     payload = json.dumps(sample_cart_invalid_data)
@@ -136,6 +110,7 @@ def test_post_negative_invalid_data():
 
     # Assert
     assert response.status_code == 400
+
 
 def test_post_no_data():
     # Send Request
@@ -152,6 +127,7 @@ def test_invalid_get_path():
 
     # Assert
     assert response.status_code == 404
+
 
 def test_invalid_put_path():
     # Send Request

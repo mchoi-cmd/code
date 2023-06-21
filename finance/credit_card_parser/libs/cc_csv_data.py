@@ -28,7 +28,7 @@ class data_brim(data_credit_card):
             self.purchase = True
 
     def __str__(self):
-        return self.posted_date + "," + self.description + "," +  self.amount
+        return self.posted_date + "," + self.description + "," + self.amount
 
     @classmethod
     def initialize(self, line):
@@ -53,7 +53,7 @@ class data_mbna(data_credit_card):
             self.purchase = True
 
     def __str__(self):
-        return self.posted_date + "," + self.description + "," +  self.amount.replace('-', '')
+        return self.posted_date + "," + self.description + "," + self.amount.replace('-', '')
 
     @classmethod
     def initialize(self, line):
@@ -90,7 +90,7 @@ class data_rogers(data_credit_card):
             self.purchase = True
 
     def __str__(self):
-        return self.posted_date + "," + self.description + "," +  self.amount
+        return self.posted_date + "," + self.description + "," + self.amount
 
     @classmethod
     def initialize(self, line):
