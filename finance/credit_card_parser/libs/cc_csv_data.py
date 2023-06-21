@@ -8,6 +8,12 @@ class data_credit_card:
         self.amount = amount
         self.purchase = False
 
+    def __str__(self):
+        return self.posted_date + "," + self.description + "," + self.amount
+
+    def display(self):
+        output_string = self.__str__(self)
+        return output_string
 
 class data_brim(data_credit_card):
     # BRIM columns
@@ -27,17 +33,11 @@ class data_brim(data_credit_card):
         if self.category not in self.payment_filter:
             self.purchase = True
 
-    def __str__(self):
-        return self.posted_date + "," + self.description + "," + self.amount
-
     @classmethod
     def initialize(self, line):
         self.__init__(self, line)
         return self
 
-    def display(self):
-        output_string = self.__str__(self)
-        return output_string
 
 class data_mbna(data_credit_card):
     # MBNA columns
@@ -60,9 +60,6 @@ class data_mbna(data_credit_card):
         self.__init__(self, line)
         return self
 
-    def display(self):
-        output_string = self.__str__(self)
-        return output_string
 
 class data_rogers(data_credit_card):
     # ROGERS column
@@ -89,14 +86,7 @@ class data_rogers(data_credit_card):
         if self.description not in self.payment_filter and self.amount[0] != "-":
             self.purchase = True
 
-    def __str__(self):
-        return self.posted_date + "," + self.description + "," + self.amount
-
     @classmethod
     def initialize(self, line):
         self.__init__(self, line)
         return self
-
-    def display(self):
-        output_string = self.__str__(self)
-        return output_string
