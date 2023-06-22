@@ -1,40 +1,37 @@
 import json
+
 import requests
 
 base_url = "http://localhost:3000"
 headers = {'Content-Type': 'application/json'}
 sample_cart_no_item = {"items" : []}
-sample_cart_single_item = {
-    "items" : [
-        {"id": "item1", "unitPrice": 10, "quantity": 2}
-    ]
-}
+sample_cart_single_item = {"items": [{"id": "item1", "unitPrice": 10, "quantity": 2}]}
 sample_cart_multiple_items = {
-    "items" : [
+    "items": [
         {"id": "item1", "unitPrice": 10, "quantity": 2},
         {"id": "item2", "unitPrice": 5, "quantity": 3},
         {"id": "item3", "unitPrice": 5, "quantity": 3},
     ]
 }
 sample_cart_invalid_type = {
-    "items" : [
+    "items": [
         {"id": "item1", "unitPrice": "10", "quantity": 2},
     ]
 }
 sample_cart_invalid_data = {
-    "items" : [
+    "items": [
         {"id": "item1", "unitPrice": 10},
         {"id": "item2", "unitPrice": 5, "quantity": 3},
         {"id": "item3", "unitPrice": 5, "quantity": 3},
     ]
 }
 sample_cart_negative_unitPrice = {
-    "items" : [
+    "items": [
         {"id": "item1", "unitPrice": -2, "quantity": 2},
     ]
 }
 sample_cart_negative_quantity = {
-    "items" : [
+    "items": [
         {"id": "item1", "unitPrice": 2, "quantity": -2},
     ]
 }
@@ -131,12 +128,13 @@ def test_invalid_put_path():
     # Assert
     assert response.status_code == 404
 
+
 # To do  / for future consideration:
 #
 # More input validations (e.g. float for numbers, special characters, etc  )
 # Review OWASP - Security test cases - mixed in special characters
 # Scale & performance consideration
-## create a cart that exceeds the expected number of items,
-## unit price and quantity that exeed expected value
-## create a reasonable large cart and check how fast the request is processed
+# - create a cart that exceeds the expected number of items,
+# - unit price and quantity that exeed expected value
+# - create a reasonable large cart and check how fast the request is processed
 # Split out test data from the tests
