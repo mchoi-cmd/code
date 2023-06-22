@@ -130,3 +130,13 @@ def test_invalid_put_path():
 
     # Assert
     assert response.status_code == 404
+
+# To do  / for future consideration:
+#
+# More input validations (e.g. float for numbers, special characters, etc  )
+# Review OWASP - Security test cases - mixed in special characters
+# Scale & performance consideration
+## create a cart that exceeds the expected number of items,
+## unit price and quantity that exeed expected value
+## create a reasonable large cart and check how fast the request is processed
+# Split out test data from the tests
