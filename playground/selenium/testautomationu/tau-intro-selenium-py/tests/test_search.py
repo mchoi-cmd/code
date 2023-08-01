@@ -3,9 +3,9 @@ These tests cover DuckDuckGo searches.
 """
 
 import pytest
-
 from pages.result import DuckDuckGoResultPage
 from pages.search import DuckDuckGoSearchPage
+
 
 @pytest.mark.parametrize("phrase", ["panda", "python", "polar bear"])
 def test_basic_duckduckgo_search_by_return(browser, phrase):
@@ -15,7 +15,7 @@ def test_basic_duckduckgo_search_by_return(browser, phrase):
 # Given the DuckDuckGo home page is displayed
   search_page.load()
 
-# When the user searches for the phrase
+# When the user searches for the phrase and click enter/return
   search_page.search_by_return(phrase)
   result_page.page_loaded()
 
@@ -39,7 +39,7 @@ def test_basic_duckduckgo_search_by_button(browser, phrase):
 # Given the DuckDuckGo home page is displayed
   search_page.load()
 
-# When the user searches for the phrase
+# When the user searches for the phrase and click submit button
   search_page.search_by_button(phrase)
   result_page.page_loaded()
 
@@ -54,10 +54,30 @@ def test_basic_duckduckgo_search_by_button(browser, phrase):
 # And the search result title contains the phrase
   assert phrase in result_page.title()
 
+@pytest.mark.parametrize("phrase", ["panda wiki", "dragon wiki", "orange wiki"])
+def test_basic_duckduckgo_click_on_a_result(browser, phrase):
+  search_page = DuckDuckGoSearchPage(browser)
+  result_page = DuckDuckGoResultPage(browser)
+
+# Given the DuckDuckGo home page is displayed
+# and the user searches for the phrase
+# and the results is loaded
+  search_page.load()
+  search_page.search_by_button(phrase)
+  result_page.page_loaded()
+
+# When the user click on the first result
+  links = result_page.result_links()
+  titles = result_page.result_link_titles()
+  links[0].click()
+
+# Then the link will display
+  assert titles[0] == browser.title
+
+
+
+
 # Independent Excercies (TODO)
-# search for different phrases
-# search by clicking the button instead of typing RETURN
-# click a search result
 # expand "More Results" at the bottom of the result page
 # verify auto-complete suggestions pertain to the search text
 # search by selecting an auto-complete suggestion
