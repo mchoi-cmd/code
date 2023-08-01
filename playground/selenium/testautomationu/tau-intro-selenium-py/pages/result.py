@@ -4,6 +4,7 @@ the page object for the DuckDuckGo search result page.
 """
 
 import time
+
 from selenium.webdriver.common.by import By
 
 
@@ -18,7 +19,8 @@ class DuckDuckGoResultPage:
         self.browser = browser
 
     # Interaction Methods
-    def page_loaded(self): # Safari only - NoSuchFrameException error if this is not used
+    # Safari only - NoSuchFrameException error if this is not used
+    def page_loaded(self):
         if self.browser.capabilities["browserName"] == "Safari":
             time.sleep(1)
 
@@ -33,7 +35,7 @@ class DuckDuckGoResultPage:
 
     def search_input_value(self):
         search_input = self.browser.find_element(*self.SEARCH_INPUT)
-        value = search_input.get_attribute('value')
+        value = search_input.get_attribute("value")
         return value
 
     def title(self):

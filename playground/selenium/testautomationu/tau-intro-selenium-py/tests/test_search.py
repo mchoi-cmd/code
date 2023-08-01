@@ -37,11 +37,8 @@ def test_basic_duckduckgo_search_by_button(browser, phrase):
     result_page = DuckDuckGoResultPage(browser)
 
     # Given the DuckDuckGo home page is displayed
-    search_page.load()
-
     # When the user searches for the phrase and click submit button
-    search_page.search_by_button(phrase)
-    result_page.page_loaded()
+    do_a_basic_duckduckgo_search_by_button(search_page, result_page, phrase)
 
     # THEN the search result query is the phrase
     assert phrase == result_page.search_input_value()
@@ -63,9 +60,7 @@ def test_basic_duckduckgo_click_on_a_result(browser, phrase):
     # Given the DuckDuckGo home page is displayed
     # and the user searches for the phrase
     # and the results is loaded
-    search_page.load()
-    search_page.search_by_button(phrase)
-    result_page.page_loaded()
+    do_a_basic_duckduckgo_search_by_button(search_page, result_page, phrase)
 
     # When the user click on the first result
     links = result_page.result_links()
@@ -75,6 +70,11 @@ def test_basic_duckduckgo_click_on_a_result(browser, phrase):
     # Then the link will display
     assert titles[0] == browser.title
 
+
+def do_a_basic_duckduckgo_search_by_button(search_page, result_page, phrase):
+    search_page.load()
+    search_page.search_by_button(phrase)
+    result_page.page_loaded()
 
 # Independent Excercies (TODO)
 # expand "More Results" at the bottom of the result page
