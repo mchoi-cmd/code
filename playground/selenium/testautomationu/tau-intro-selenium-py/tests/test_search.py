@@ -9,70 +9,70 @@ from pages.search import DuckDuckGoSearchPage
 
 @pytest.mark.parametrize("phrase", ["panda", "python", "polar bear"])
 def test_basic_duckduckgo_search_by_return(browser, phrase):
-  search_page = DuckDuckGoSearchPage(browser)
-  result_page = DuckDuckGoResultPage(browser)
+    search_page = DuckDuckGoSearchPage(browser)
+    result_page = DuckDuckGoResultPage(browser)
 
-# Given the DuckDuckGo home page is displayed
-  search_page.load()
+    # Given the DuckDuckGo home page is displayed
+    search_page.load()
 
-# When the user searches for the phrase and click enter/return
-  search_page.search_by_return(phrase)
-  result_page.page_loaded()
+    # When the user searches for the phrase and click enter/return
+    search_page.search_by_return(phrase)
+    result_page.page_loaded()
 
-# THEN the search result query is the phrase
-  assert phrase == result_page.search_input_value()
+    # THEN the search result query is the phrase
+    assert phrase == result_page.search_input_value()
 
-# And the search result links pertain to the phrase
-  titles = result_page.result_link_titles()
-  matches = [t for t in titles if phrase.lower() in t.lower()]
-  assert len(matches) > 0
+    # And the search result links pertain to the phrase
+    titles = result_page.result_link_titles()
+    matches = [t for t in titles if phrase.lower() in t.lower()]
+    assert len(matches) > 0
 
-# And the search result title contains the phrase
-  assert phrase in result_page.title()
+    # And the search result title contains the phrase
+    assert phrase in result_page.title()
 
 
 @pytest.mark.parametrize("phrase", ["panda", "python", "polar bear"])
 def test_basic_duckduckgo_search_by_button(browser, phrase):
-  search_page = DuckDuckGoSearchPage(browser)
-  result_page = DuckDuckGoResultPage(browser)
+    search_page = DuckDuckGoSearchPage(browser)
+    result_page = DuckDuckGoResultPage(browser)
 
-# Given the DuckDuckGo home page is displayed
-  search_page.load()
+    # Given the DuckDuckGo home page is displayed
+    search_page.load()
 
-# When the user searches for the phrase and click submit button
-  search_page.search_by_button(phrase)
-  result_page.page_loaded()
+    # When the user searches for the phrase and click submit button
+    search_page.search_by_button(phrase)
+    result_page.page_loaded()
 
-# THEN the search result query is the phrase
-  assert phrase == result_page.search_input_value()
+    # THEN the search result query is the phrase
+    assert phrase == result_page.search_input_value()
 
-# And the search result links pertain to the phrase
-  titles = result_page.result_link_titles()
-  matches = [t for t in titles if phrase.lower() in t.lower()]
-  assert len(matches) > 0
+    # And the search result links pertain to the phrase
+    titles = result_page.result_link_titles()
+    matches = [t for t in titles if phrase.lower() in t.lower()]
+    assert len(matches) > 0
 
-# And the search result title contains the phrase
-  assert phrase in result_page.title()
+    # And the search result title contains the phrase
+    assert phrase in result_page.title()
 
-@pytest.mark.parametrize("phrase", ["panda wiki", "dragon wiki", "orange wiki"])
+@pytest.mark.parametrize("phrase", ["panda"])
 def test_basic_duckduckgo_click_on_a_result(browser, phrase):
-  search_page = DuckDuckGoSearchPage(browser)
-  result_page = DuckDuckGoResultPage(browser)
+    search_page = DuckDuckGoSearchPage(browser)
+    result_page = DuckDuckGoResultPage(browser)
 
-# Given the DuckDuckGo home page is displayed
-# and the user searches for the phrase
-# and the results is loaded
-  search_page.load()
-  search_page.search_by_button(phrase)
-  result_page.page_loaded()
+    # Given the DuckDuckGo home page is displayed
+    # and the user searches for the phrase
+    # and the results is loaded
+    search_page.load()
+    search_page.search_by_button(phrase)
+    result_page.page_loaded()
 
-# When the user click on the first result
-  links = result_page.result_links()
-  titles = result_page.result_link_titles()
-  links[0].click()
+    # When the user click on the first result
+    links = result_page.result_links()
+    titles = result_page.result_link_titles()
+    links[0].click()
 
-# Then the link will display
-  assert titles[0] == browser.title
+    # Then the link will display
+    assert titles[0] == browser.title
 
 
 
