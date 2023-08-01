@@ -9,24 +9,31 @@ from selenium.webdriver.common.keys import Keys
 
 class DuckDuckGoSearchPage:
 
-  # URL
+# URL
 
-  URL = 'https://www.duckduckgo.com'
+  URL = "https://www.duckduckgo.com"
 
-  # Locators
+# Locators
 
-  SEARCH_INPUT = (By.ID, 'searchbox_input')
+  SEARCH_INPUT = (By.ID, "searchbox_input")
+  SUBMIT_BUTTON = (By.XPATH, "//button[@type='submit']")
 
-  # Initializer
+# Initializer
 
   def __init__(self, browser):
     self.browser = browser
 
-  # Interaction Methods
+# Interaction Methods
 
   def load(self):
     self.browser.get(self.URL)
 
-  def search(self, phrase):
+  def search_by_return(self, phrase):
     search_input = self.browser.find_element(*self.SEARCH_INPUT)
     search_input.send_keys(phrase + Keys.RETURN)
+
+  def search_by_button(self, phrase):
+    search_input = self.browser.find_element(*self.SEARCH_INPUT)
+    search_input.send_keys(phrase)
+    submit_button = self.browser.find_element(*self.SUBMIT_BUTTON)
+    submit_button.click()

@@ -8,18 +8,17 @@ from selenium.webdriver.common.by import By
 
 class DuckDuckGoResultPage:
 
-  # Locators
+# Locators
 
-  RESULT_LINKS = (By.CSS_SELECTOR, 'a.result__a')
-  SEARCH_INPUT = (By.ID, 'search_form_input')
-  DUCK_BAR = (By.ID, 'duckbar')
+  RESULT_LINKS = (By.CSS_SELECTOR, "a.result__a")
+  SEARCH_INPUT = (By.ID, "search_form_input")
+  DUCK_BAR = (By.ID, "duckbar")
 
-  # Initializer
-
+# Initializer
   def __init__(self, browser):
     self.browser = browser
 
-  # Interaction Methods
+# Interaction Methods
   def page_loaded(self): # Safari only - NoSuchFrameException error if this is not used
      if self.browser.capabilities["browserName"] == "Safari":
        time.sleep(1)
