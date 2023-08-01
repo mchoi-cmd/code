@@ -20,15 +20,9 @@ def test_basic_duckduckgo_search_by_return(browser, phrase):
     result_page.page_loaded()
 
     # THEN the search result query is the phrase
-    assert phrase == result_page.search_input_value()
-
     # And the search result links pertain to the phrase
-    titles = result_page.result_link_titles()
-    matches = [t for t in titles if phrase.lower() in t.lower()]
-    assert len(matches) > 0
-
     # And the search result title contains the phrase
-    assert phrase in result_page.title()
+    verify_basic_duckduckgo_result_page(result_page, phrase)
 
 
 @pytest.mark.parametrize("phrase", ["panda", "python", "polar bear"])
@@ -38,7 +32,39 @@ def test_basic_duckduckgo_search_by_button(browser, phrase):
 
     # Given the DuckDuckGo home page is displayed
     # When the user searches for the phrase and click submit button
-    do_a_basic_duckduckgo_search_by_button(search_page, result_page, phrase)
+    do_a_basic_duckduckgo_search_by_button(search_page, phrase)
+
+    # THEN the search result query is the phrase
+    # And the search result links pertain to the phrase
+    # And the search result title contains the phrase
+    verify_basic_duckduckgo_result_page(result_page, phrase)
+
+
+@pytest.mark.parametrize("phrase", ["panda"])
+def test_basic_duckduckgo_click_on_a_result(browser, phrase):
+    search_page = DuckDuckGoSearchPage(browser)
+    result_page = DuckDuckGoResultPage(browser)
+
+    # Given the DuckDuckGo home page is displayed
+    # and the user searches for the phrase
+    # and the results is loaded
+    do_a_basic_duckduckgo_search_by_button(search_page, phrase)
+
+    # When the user click on the first result
+    links = result_page.result_links()
+    titles = result_page.result_link_titles()
+    links[0].click()
+
+    # Then the link will display
+    assert titles[0] == browser.title
+
+
+def do_a_basic_duckduckgo_search_by_button(search_page, phrase):
+    search_page.load()
+    search_page.search_by_button(phrase)
+
+def verify_basic_duckduckgo_result_page(result_page, phrase):
+    result_page.page_loaded()
 
     # THEN the search result query is the phrase
     assert phrase == result_page.search_input_value()
@@ -50,31 +76,6 @@ def test_basic_duckduckgo_search_by_button(browser, phrase):
 
     # And the search result title contains the phrase
     assert phrase in result_page.title()
-
-
-@pytest.mark.parametrize("phrase", ["panda"])
-def test_basic_duckduckgo_click_on_a_result(browser, phrase):
-    search_page = DuckDuckGoSearchPage(browser)
-    result_page = DuckDuckGoResultPage(browser)
-
-    # Given the DuckDuckGo home page is displayed
-    # and the user searches for the phrase
-    # and the results is loaded
-    do_a_basic_duckduckgo_search_by_button(search_page, result_page, phrase)
-
-    # When the user click on the first result
-    links = result_page.result_links()
-    titles = result_page.result_link_titles()
-    links[0].click()
-
-    # Then the link will display
-    assert titles[0] == browser.title
-
-
-def do_a_basic_duckduckgo_search_by_button(search_page, result_page, phrase):
-    search_page.load()
-    search_page.search_by_button(phrase)
-    result_page.page_loaded()
 
 # Independent Excercies (TODO)
 # expand "More Results" at the bottom of the result page
