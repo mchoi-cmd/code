@@ -54,6 +54,7 @@ def test_basic_duckduckgo_search_by_button(browser, phrase):
     # And the search result title contains the phrase
     assert phrase in result_page.title()
 
+
 @pytest.mark.parametrize("phrase", ["panda"])
 def test_basic_duckduckgo_click_on_a_result(browser, phrase):
     search_page = DuckDuckGoSearchPage(browser)
@@ -73,8 +74,6 @@ def test_basic_duckduckgo_click_on_a_result(browser, phrase):
 
     # Then the link will display
     assert titles[0] == browser.title
-
-
 
 
 # Independent Excercies (TODO)
