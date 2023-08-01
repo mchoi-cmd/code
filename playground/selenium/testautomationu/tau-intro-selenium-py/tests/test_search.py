@@ -63,6 +63,7 @@ def do_a_basic_duckduckgo_search_by_button(search_page, phrase):
     search_page.load()
     search_page.search_by_button(phrase)
 
+
 def verify_basic_duckduckgo_result_page(result_page, phrase):
     result_page.page_loaded()
 
@@ -76,6 +77,7 @@ def verify_basic_duckduckgo_result_page(result_page, phrase):
 
     # And the search result title contains the phrase
     assert phrase in result_page.title()
+
 
 # Independent Excercies (TODO)
 # expand "More Results" at the bottom of the result page
