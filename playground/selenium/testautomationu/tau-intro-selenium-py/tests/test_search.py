@@ -79,6 +79,7 @@ def test_duckduckgo_expand_more_results(browser, phrase):
     # THEN the number of matches will increase
     assert matches_before < matches_after
 
+
 @pytest.mark.parametrize("phrase", ["panda", "python", "polar bear"])
 def test_duckduckgo_auto_complete_suggestions(browser, phrase):
     search_page = DuckDuckGoSearchPage(browser)
