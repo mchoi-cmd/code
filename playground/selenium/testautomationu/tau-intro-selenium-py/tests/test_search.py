@@ -79,6 +79,26 @@ def test_duckduckgo_expand_more_results(browser, phrase):
     # THEN the number of matches will increase
     assert matches_before < matches_after
 
+@pytest.mark.parametrize("phrase", ["panda", "python", "polar bear"])
+def test_duckduckgo_auto_complete_suggestions(browser, phrase):
+    search_page = DuckDuckGoSearchPage(browser)
+
+    # Given the DuckDuckGo home page is displayed
+    search_page.load()
+
+    # When the user type a phrase in search box
+    search_page.type_in_search_box(phrase)
+    search_page.type_in_search_box(" ")
+    suggestions = search_page.auto_complete_suggestions()
+    num_suggestions = len(suggestions)
+
+    # Then auto complete suggestions should appear
+    assert num_suggestions > 0
+    # And auto complete suggestions contain the original phrase
+    matches = [t for t in suggestions if phrase.lower() in t.lower()]
+
+    assert num_suggestions == len(matches)
+
 
 # Helper methods
 def verify_basic_duckduckgo_result_page(result_page, phrase):
