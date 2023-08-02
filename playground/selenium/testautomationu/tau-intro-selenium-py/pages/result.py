@@ -10,6 +10,7 @@ from selenium.webdriver.common.by import By
 
 class DuckDuckGoResultPage:
     # Locators
+    MORE_RESULTS = (By.ID, "more-results")
     RESULT_LINKS = (By.XPATH, "//a[@data-testid='result-title-a']")
     SEARCH_INPUT = (By.ID, "search_form_input")
     DUCK_BAR = (By.ID, "duckbar")
@@ -19,8 +20,12 @@ class DuckDuckGoResultPage:
         self.browser = browser
 
     # Interaction Methods
-    # Safari only - NoSuchFrameException error if this is not used
+    def more_results_button(self):
+        more_results_button = self.browser.find_element(*self.MORE_RESULTS)
+        return more_results_button
+
     def page_loaded(self):
+        # Safari only - NoSuchFrameException error if this is not used
         if self.browser.capabilities["browserName"] == "Safari":
             time.sleep(1)
 
@@ -40,3 +45,8 @@ class DuckDuckGoResultPage:
 
     def title(self):
         return self.browser.title
+
+    def number_of_matched_results(self, phrase):
+        titles = self.result_link_titles()
+        matches = [t for t in titles if phrase.lower() in t.lower()]
+        return len(matches)

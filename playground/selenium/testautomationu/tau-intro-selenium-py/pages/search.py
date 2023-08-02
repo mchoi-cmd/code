@@ -32,3 +32,7 @@ class DuckDuckGoSearchPage:
         search_input.send_keys(phrase)
         submit_button = self.browser.find_element(*self.SUBMIT_BUTTON)
         submit_button.click()
+
+    def load_duckduckgo_and_search_phrase_by_button(self, phrase):
+        self.load()
+        self.search_by_button(phrase)
