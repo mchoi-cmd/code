@@ -9,3 +9,7 @@ venv/
 *package-lock.json
 *package.json
 *test*.xml
+*.mir
+*.mcgen
+*.mbc
+*.prg*
