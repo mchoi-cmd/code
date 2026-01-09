@@ -12,7 +12,7 @@ class DataCreditCard:
 
     def display(self):
         """display posted date, description and amount"""
-        output_string = self.posted_date + "," + self.description + "," + self.amount
+        output_string = self.posted_date + "," + self.description + ",," + self.amount
         return output_string
 
     def is_purchase(self):
@@ -60,8 +60,8 @@ class DataMbna(DataCreditCard):
         DataCreditCard.__init__(self, line[0], line[1], line[3])
         self.purchase = self.description not in self.payment_filter
 
-    def __str__(self):
-        return self.posted_date + "," + self.description + "," + self.amount.replace('-', '')
+    def display(self):
+        return self.posted_date + "," + self.description + ",," + self.amount.replace('-', '')
 
     @classmethod
     def initialize(cls, line):
