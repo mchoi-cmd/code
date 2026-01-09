@@ -1,6 +1,7 @@
 # Copyright Michael Choi All Rights Reserved
 """module containing class for credit card csv data"""
 
+
 class DataCreditCard:
     """class representing generic credit card data"""
 
@@ -101,6 +102,7 @@ class DataRogers(DataCreditCard):
         """public method to initialize the class"""
         cls.__init__(cls, line)
         return cls
+
 
 class DataBmo(DataCreditCard):
     """class representing BMO credit card data"""
