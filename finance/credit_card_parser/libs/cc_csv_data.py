@@ -13,7 +13,8 @@ class DataCreditCard:
 
     def display(self):
         """display posted date, description and amount"""
-        output_string = self.posted_date + "," + self.description + ",," + self.amount
+        output_string = (self.posted_date + "," + self.description +
+                         ",," + self.amount)
         return output_string
 
     def is_purchase(self):
@@ -62,7 +63,11 @@ class DataMbna(DataCreditCard):
         self.purchase = self.description not in self.payment_filter
 
     def display(self):
-        return self.posted_date + "," + self.description + ",," + self.amount.replace('-', '')
+        return (
+            self.posted_date + ","
+            + self.description + ",,"
+            + self.amount.replace('-', '')
+            )
 
     @classmethod
     def initialize(cls, line):
@@ -94,7 +99,8 @@ class DataRogers(DataCreditCard):
     def __init__(self, line):
         DataCreditCard.__init__(self, line[1], line[7], line[12])
         self.transaction_date = line[0]
-        if self.description not in self.payment_filter and self.amount[0] != "-":
+        if (self.description not in self.payment_filter and
+                self.amount[0] != "-"):
             self.purchase = True
 
     @classmethod
@@ -118,7 +124,10 @@ class DataBmo(DataCreditCard):
     def __init__(self, line):
         DataCreditCard.__init__(self, line[3], line[5], line[4])
         self.transaction_date = line[2]
-        self.purchase = (self.description not in self.payment_filter and self.amount[0] != "-")
+        self.purchase = (
+            self.description not in self.payment_filter
+            and self.amount[0] != "-"
+            )
 
     @classmethod
     def initialize(cls, line):

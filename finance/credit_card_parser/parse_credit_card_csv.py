@@ -8,7 +8,7 @@ import libs.cc_csv_data as cc_data
 parser = argparse.ArgumentParser(description="Parse Credit Card csv file")
 parser.add_argument("company",
                     help="Credit Card company",
-                    choices= ["brim", "mbna", "rogers", "bmo"])
+                    choices=["brim", "mbna", "rogers", "bmo"])
 parser.add_argument("filename", help="Credit Card csv file, full path")
 args = parser.parse_args()
 
