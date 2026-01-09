@@ -8,13 +8,14 @@ class DataCreditCard:
     def __init__(self, posted_date, description, amount):
         self.posted_date = posted_date
         self.description = description
-        self.amount = amount.replace(',', '')
+        self.amount = amount.replace(",", "")
         self.purchase = False
 
     def display(self):
         """display posted date, description and amount"""
-        output_string = (self.posted_date + "," + self.description +
-                         ",," + self.amount)
+        output_string = (
+            self.posted_date + "," + self.description + ",," + self.amount
+        )
         return output_string
 
     def is_purchase(self):
@@ -24,6 +25,7 @@ class DataCreditCard:
 
 class DataBrim(DataCreditCard):
     """class representing BRIM credit card data"""
+
     # BRIM columns
     # 0 ['No',
     # 1 'Transaction Date',
@@ -51,6 +53,7 @@ class DataBrim(DataCreditCard):
 
 class DataMbna(DataCreditCard):
     """class representing MBNA credit card data"""
+
     # MBNA columns
     # 0 Posted Date,
     # 1 Payee,
@@ -67,7 +70,7 @@ class DataMbna(DataCreditCard):
             self.posted_date + ","
             + self.description + ",,"
             + self.amount.replace('-', '')
-            )
+        )
 
     @classmethod
     def initialize(cls, line):
@@ -78,6 +81,7 @@ class DataMbna(DataCreditCard):
 
 class DataRogers(DataCreditCard):
     """class representing Rogers credit card data"""
+
     # ROGERS column
     # 0 "Date",
     # 1 "Posted Date",
@@ -99,8 +103,7 @@ class DataRogers(DataCreditCard):
     def __init__(self, line):
         DataCreditCard.__init__(self, line[1], line[7], line[12])
         self.transaction_date = line[0]
-        if (self.description not in self.payment_filter and
-                self.amount[0] != "-"):
+        if self.description not in self.payment_filter and self.amount[0] != "-":
             self.purchase = True
 
     @classmethod
@@ -112,6 +115,7 @@ class DataRogers(DataCreditCard):
 
 class DataBmo(DataCreditCard):
     """class representing BMO credit card data"""
+
     # bmo column
     # 0 Item #
     # 1 Card #
@@ -125,9 +129,8 @@ class DataBmo(DataCreditCard):
         DataCreditCard.__init__(self, line[3], line[5], line[4])
         self.transaction_date = line[2]
         self.purchase = (
-            self.description not in self.payment_filter
-            and self.amount[0] != "-"
-            )
+            self.description not in self.payment_filter and self.amount[0] != "-"
+        )
 
     @classmethod
     def initialize(cls, line):
