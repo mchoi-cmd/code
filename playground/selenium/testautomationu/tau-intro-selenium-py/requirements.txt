@@ -18,5 +18,5 @@ sortedcontainers==2.4.0
 tomli==2.0.1; python_version < '3.11'
 trio==0.22.2; python_version >= '3.7'
 trio-websocket==0.10.3; python_version >= '3.7'
-urllib3[socks]==2.2.2; python_version >= '3.7'
+urllib3[socks]==2.6.3; python_version >= '3.7'
 wsproto==1.2.0; python_full_version >= '3.7.0'
