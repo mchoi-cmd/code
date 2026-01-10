@@ -3,7 +3,7 @@
 
 import argparse
 import csv
-from typing import Callable, Any
+from typing import Any, Callable
 
 import libs.cc_csv_data as cc_data
 

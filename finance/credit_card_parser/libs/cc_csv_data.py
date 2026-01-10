@@ -13,9 +13,7 @@ class DataCreditCard:
 
     def display(self):
         """display posted date, description and amount"""
-        output_string = (
-            self.posted_date + "," + self.description + ",," + self.amount
-        )
+        output_string = self.posted_date + "," + self.description + ",," + self.amount
         return output_string
 
     def is_purchase(self):
@@ -67,8 +65,10 @@ class DataMbna(DataCreditCard):
 
     def display(self):
         return (
-            self.posted_date + ","
-            + self.description + ",,"
+            self.posted_date
+            + ","
+            + self.description
+            + ",,"
             + self.amount.replace('-', '')
         )
 
