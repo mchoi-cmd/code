@@ -3,17 +3,22 @@
 
 import argparse
 import csv
+from typing import Callable, Any
+
 import libs.cc_csv_data as cc_data
 
 parser = argparse.ArgumentParser(description="Parse Credit Card csv file")
-parser.add_argument("company",
-                    help="Credit Card company",
-                    choices= ["brim", "mbna", "rogers", "bmo"])
+parser.add_argument(
+    "company", help="Credit Card", choices=["brim", "mbna", "rogers", "bmo"]
+)
 parser.add_argument("filename", help="Credit Card csv file, full path")
 args = parser.parse_args()
 
 filelocation = args.filename
 company = args.company
+
+process_data: Callable[[Any], Any]
+output_data: Callable[[Any], str]
 
 match company:
     case "brim":
