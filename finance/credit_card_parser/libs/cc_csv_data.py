@@ -69,7 +69,7 @@ class DataMbna(DataCreditCard):
             + ","
             + self.description
             + ",,"
-            + self.amount.replace('-', '')
+            + self.amount.replace("-'", "")
         )
 
     @classmethod
