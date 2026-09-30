@@ -1,6 +1,6 @@
 import html
 import re
-from urllib.parse import quote, unquote
+from urllib.parse import parse_qs, quote, unquote, urlparse
 
 import requests
 
@@ -58,6 +58,14 @@ def title_matches(expected_title, candidate_title):
     overlap = expected_tokens & candidate_tokens
     required = max(1, len(expected_tokens) // 2)
     return len(overlap) >= required
+
+
+def magnet_title_matches(expected_title, magnet):
+    """Return whether the magnet display name contains the requested title."""
+    display_name = parse_qs(urlparse(magnet).query).get("dn", [""])[0]
+    expected = normalize_title(expected_title)
+    candidate = normalize_title(display_name)
+    return bool(expected and candidate and expected in candidate)
 
 
 def find_release_table(page_html):
@@ -118,6 +126,15 @@ def pick_best_magnet(rows, requested_title, preferred_resolutions):
     """Choose the best magnet for the requested show and resolutions."""
     if not rows:
         raise RuntimeError("No magnet links found for this title")
+
+    rows = [
+        row for row in rows
+        if magnet_title_matches(requested_title, row["magnet"])
+    ]
+    if not rows:
+        raise RuntimeError(
+            f"No magnet link contains the requested title '{requested_title}'"
+        )
 
     preferred = [int(res) for res in preferred_resolutions]
     matching = [row for row in rows if title_matches(requested_title, row["title"])]

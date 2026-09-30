@@ -25,7 +25,11 @@ def add_to_transmission(session, download_dir, magnet_url, rpc_url):
         "params": {"path": download_dir},
         "id": "webui",
     }
-    transmission_request(session, rpc_url, payload)
+    free_space = transmission_request(session, rpc_url, payload)
+    size_bytes = free_space.get("result", {}).get("size_bytes")
+    if size_bytes is not None:
+        size_gb = size_bytes / 1_000_000_000
+        print(f"Free space at {download_dir}: {size_gb:.2f} GB")
 
     payload = {
         "jsonrpc": "2.0",
