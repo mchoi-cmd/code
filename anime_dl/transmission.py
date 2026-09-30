@@ -1,3 +1,5 @@
+"""Module for interacting with Transmission."""
+
 DEFAULT_TRANSMISSION_URL = "http://192.168.1.103:9093/transmission/rpc"
 
 

@@ -1,3 +1,5 @@
+"""Module for interacting with SubsPlease."""
+
 import html
 import re
 from urllib.parse import parse_qs, quote, unquote, urlparse
