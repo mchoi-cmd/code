@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Anime downloader that searches SubsPlease and adds torrents to Transmission."""
+
 import argparse
 import json
 import sys
@@ -65,8 +66,7 @@ def load_entries(json_path):
 def main():
     parser = argparse.ArgumentParser(
         description=(
-            "Download anime torrents from SubsPlease and add them to "
-            "Transmission."
+            "Download anime torrents from SubsPlease and add them to " "Transmission."
         )
     )
     parser.add_argument(

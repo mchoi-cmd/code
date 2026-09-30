@@ -8,7 +8,9 @@ def transmission_request(session, url, payload):
     response = session.post(url, json=payload, headers=headers, timeout=30)
 
     if response.status_code == 409 and "X-Transmission-Session-Id" in response.headers:
-        session.headers["X-Transmission-Session-Id"] = response.headers["X-Transmission-Session-Id"]
+        session.headers["X-Transmission-Session-Id"] = response.headers[
+            "X-Transmission-Session-Id"
+        ]
         response = session.post(url, json=payload, headers=headers, timeout=30)
 
     response.raise_for_status()

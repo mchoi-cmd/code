@@ -13,10 +13,7 @@ HEADERS = {
         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 "
         "Safari/537.36"
     ),
-    "Accept": (
-        "text/html,application/xhtml+xml,application/xml;q=0.9,"
-        "*/*;q=0.8"
-    ),
+    "Accept": ("text/html,application/xhtml+xml,application/xml;q=0.9," "*/*;q=0.8"),
 }
 
 
@@ -85,9 +82,7 @@ def find_release_table(page_html):
 def parse_release_rows(table_html):
     """Parse row entries from a release table when it is populated."""
     rows = []
-    row_pattern = re.compile(
-        r"<tr\b[^>]*>.*?</tr>", flags=re.IGNORECASE | re.DOTALL
-    )
+    row_pattern = re.compile(r"<tr\b[^>]*>.*?</tr>", flags=re.IGNORECASE | re.DOTALL)
 
     for row_match in row_pattern.finditer(table_html):
         row_html = row_match.group(0)
@@ -106,7 +101,7 @@ def parse_release_rows(table_html):
 
         badge_pattern = re.compile(
             r'<a\s+href=["\'](magnet:[^"\']+)["\'][^>]*>'
-            r'.*?<span[^>]*>\s*(\d{3,4})p\s*</span>',
+            r".*?<span[^>]*>\s*(\d{3,4})p\s*</span>",
             flags=re.IGNORECASE | re.DOTALL,
         )
 
@@ -127,10 +122,7 @@ def pick_best_magnet(rows, requested_title, preferred_resolutions):
     if not rows:
         raise RuntimeError("No magnet links found for this title")
 
-    rows = [
-        row for row in rows
-        if magnet_title_matches(requested_title, row["magnet"])
-    ]
+    rows = [row for row in rows if magnet_title_matches(requested_title, row["magnet"])]
     if not rows:
         raise RuntimeError(
             f"No magnet link contains the requested title '{requested_title}'"
@@ -148,9 +140,7 @@ def pick_best_magnet(rows, requested_title, preferred_resolutions):
         magnet = row["magnet"]
 
         if resolution in preferred:
-            exact.append(
-                (resolution, magnet, preferred.index(resolution))
-            )
+            exact.append((resolution, magnet, preferred.index(resolution)))
         else:
             closest = min(abs(resolution - pref) for pref in preferred)
             fallback.append((closest, magnet))
