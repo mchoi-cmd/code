@@ -4,6 +4,7 @@
 import argparse
 import json
 import sys
+from datetime import datetime
 from pathlib import Path
 
 import requests
@@ -92,6 +93,7 @@ def main():
         help="Transmission RPC endpoint.",
     )
     args = parser.parse_args()
+    print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
     try:
         entries = load_entries(args.input)
