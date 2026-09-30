@@ -7,7 +7,6 @@ import sys
 from pathlib import Path
 
 import requests
-
 from subsplease import DEFAULT_SUBSPLEASE_URL, search_for_magnet
 from transmission import DEFAULT_TRANSMISSION_URL, add_to_transmission
 
