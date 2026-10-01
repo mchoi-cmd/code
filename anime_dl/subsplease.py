@@ -2,6 +2,7 @@
 
 import html
 import re
+from datetime import datetime, timedelta, timezone
 from urllib.parse import parse_qs, quote, unquote, urlparse
 
 import requests
@@ -65,6 +66,11 @@ def magnet_title_matches(expected_title, magnet):
     expected = normalize_title(expected_title)
     candidate = normalize_title(display_name)
     return bool(expected and candidate and expected in candidate)
+
+
+def is_batch_release(episode):
+    """Return whether an episode value describes a range of episodes."""
+    return re.fullmatch(r"\d+\s*-\s*\d+", str(episode or "").strip()) is not None
 
 
 def find_release_table(page_html):
@@ -164,11 +170,25 @@ def parse_api_results(api_payload):
     if not isinstance(api_payload, dict):
         return rows
 
+    today = datetime.now(timezone.utc).date()
+    cutoff = today - timedelta(days=7)
+
     for release_key, release_data in api_payload.items():
         if not isinstance(release_data, dict):
             continue
 
+        try:
+            release_date = datetime.strptime(
+                release_data.get("time", ""), "%m/%d/%y"
+            ).date()
+        except (TypeError, ValueError):
+            continue
+        if not cutoff <= release_date <= today:
+            continue
+
         title = release_data.get("show") or release_key.split(" - ", 1)[0]
+        if is_batch_release(release_data.get("episode")):
+            continue
         downloads = release_data.get("downloads") or []
         for download in downloads:
             magnet = download.get("magnet") or ""
