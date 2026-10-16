@@ -1,4 +1,4 @@
 [
-  {"title": "TitleAAA", "resolutions": [720, 1080]},
-  {"title": "TitleBBB", "resolutions": [720]}
+  { "title": "TitleAAA", "resolutions": [720, 1080] },
+  { "title": "TitleBBB", "resolutions": [720] }
 ]
