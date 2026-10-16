@@ -8,11 +8,17 @@ from datetime import datetime
 from pathlib import Path
 
 import requests
+
 from subsplease import DEFAULT_SUBSPLEASE_URL, search_for_magnet
 from transmission import DEFAULT_TRANSMISSION_URL, add_to_transmission
 
 DEFAULT_DOWNLOAD_DIR = "/Volumes/BT/Videos"
 DEFAULT_RESOLUTIONS = [480, 720, 1080]
+
+
+def print_timestamp():
+    """Print a timestamp to stdout."""
+    print(f"****Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}****")
 
 
 def normalize_resolution_list(value):
@@ -93,7 +99,7 @@ def main():
         help="Transmission RPC endpoint.",
     )
     args = parser.parse_args()
-    print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print_timestamp()
 
     try:
         entries = load_entries(args.input)
@@ -129,6 +135,7 @@ def main():
                 file=sys.stderr,
             )
 
+    print_timestamp()
     return 0
 
 

@@ -14,3 +14,4 @@ venv/
 *.mbc
 *.prg*
 *.log
+anime_dl/anime_list.json
