@@ -179,7 +179,8 @@ def parse_api_results(api_payload):
 
         try:
             release_date = datetime.strptime(
-                release_data.get("time", ""), "%m/%d/%y"
+                release_data.get("release_date", ""),
+                "%a, %d %b %Y %H:%M:%S %z",
             ).date()
         except (TypeError, ValueError):
             continue
